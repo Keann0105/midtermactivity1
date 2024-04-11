@@ -24,9 +24,12 @@ export const store = new Vuex.Store({
         const book = state.books.find(book => book.id === item.id);
         return {
           ...item,
-          totalPrice: item.quantity * book.price
+          totalPrice: (item.quantity * book.price)
         };
       });
+    },
+    totalAmountDue: (state, getters) => {
+      return getters.cartItems.reduce((total, item) => total + parseFloat(item.totalPrice), 0)
     }
   },
   mutations: {

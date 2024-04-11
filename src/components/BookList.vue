@@ -68,7 +68,6 @@
                 <div class="input-group-text" id="btnGroupAddonCurrency">₱</div> <!-- Unique id for this element -->
               </div>
               <input type="text" class="form-control" placeholder="Total" aria-describedby="btnGroupAddon btnGroupAddonCurrency" :value="totalAmountDue">
-              <button class="btn btn-primary ml-md-2 mt-2 mt-md-0">Checkout</button>
             </div>
         </div>  
       </div>
