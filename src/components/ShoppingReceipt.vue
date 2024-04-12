@@ -1,81 +1,151 @@
-<template>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <div class="d-flex justify-content-center w-100 mt-5 ">
-    <div class="receipt-container p-4 ">
-      <h2 class="mb-4 text-center">Receipt</h2>
-      <div v-if="cartItems.length > 0">
-        <div v-for="(item, index) in cartItems" :key="index" class="receipt-item">
-          <p class="mb-1">{{ item.title }}</p>
-          <p class="mb-1 text-muted">Quantity: {{ item.quantity }}</p>
-          <p class="mb-0 text-muted">Price: ₱{{ item.totalPrice }}</p>
-        </div>
-        <hr>
-        <h4 class="font-weight-bold text-end mb-1 total-amount">Total Amount Due: ₱{{ totalAmountDue }}</h4>
-        <button @click="confirmOrder" class="btn btn-success btn-block" data-bs-toggle="modal">Confirm Order</button>
-        <button @click="goToBookList" class="btn btn-primary btn-block">Go to Book List</button>
-      </div>
-      <div v-else>
-        <p class="text-center">No items in the cart.</p>
+import Vuex from "vuex";
+import authService from "@/services/authService";
 
-        <button @click="goToBookList" class="btn btn-primary btn-block">Go to Book List</button>
-      </div>
+const TOKEN_KEY = "user_token";
+const token = localStorage.getItem(TOKEN_KEY);
+export const store = new Vuex.Store({
+  name: "store",
+  state: {
+    books: [
+      { 
+        id: 1, title: "Berserk", 
+        author: "Kentaro Miura",
+        price: 10.01, 
+        imageUrl: 'img/book1.jpg' },
 
-    </div>
-  </div>
-
-</template>
-
-<script>
-import { mapGetters } from 'vuex';
-
-export default {
-  computed: {
-    ...mapGetters(['cartItems', 'totalAmountDue'])
+      { 
+        id: 2, title: "One Piece",
+        author: "Eiichiro Oda",
+        price: 12.01,
+        imageUrl: 'img/book2.jpg'
+       },
+      { 
+        id: 3, title: "Naruto",
+        author: "Masashi Kishimoto",
+        price: 11.01,
+        imageUrl: 'img/book3.jpg'
+      },
+      { 
+        id: 4, 
+        title: "Dragon Ball", 
+        author: "Akira Toriyama", 
+        price: 9.01,
+        imageUrl: 'img/book4.jpg'
+      },
+      {
+        id: 5,
+        title: "Attack on Titan",
+        author: "Hajime Isayama",
+        price: 13.01,
+        imageUrl: 'img/book5.jpg'
+      },
+      {
+        id: 6,
+        title: "My Hero Academia",
+        author: "Kohei Horikoshi",
+        price: 10.99,
+        imageUrl: 'img/book6.jpg'
+      },
+      { 
+        id: 7, title: "Death Note",
+        author: "Tsugumi Ohba", 
+        price: 11.5,
+        imageUrl: 'img/book7.jpg'
+       },
+      {
+        id: 8,
+        title: "Fullmetal Alchemist",
+        author: "Hiromu Arakawa",
+        price: 12.75,
+        imageUrl: 'img/book8.jpg'
+      },
+      { id: 9, 
+        title: "Tokyo Ghoul", 
+        author: "Sui Ishida", 
+        price: 9.75,
+        imageUrl: 'img/book9.jpg'
+      },
+      {
+        id: 10,
+        title: "Demon Slayer",
+        author: "Koyoharu Gotouge",
+        price: 13.99,
+        imageUrl: 'img/book10.jpg'
+      },
+    ],
+    cart: [],
+    isLoggedIn: token ? true : false,
   },
-  methods: {
-    goToBookList() {
-      this.$router.push('/shop');
+
+  getters: {
+    salesBooks: (state) => state.books,
+
+    cartItems: (state) => {
+      return state.cart.map((item) => {
+        const book = state.books.find((book) => book.id === item.id);
+        return {
+          ...item,
+          totalPrice: item.quantity * book.price,
+        };
+      });
     },
-    confirmOrder() {
-      this.$router.push('/shop');
-      alert("Order has confirmed.")
-      window.location.reload();
-    }
-  }
-};
-</script>
+    totalAmountDue: (state, getters) => {
+      return getters.cartItems.reduce(
+        (total, item) => total + parseFloat(item.totalPrice),
+        0
+      );
+    },
+  },
+  mutations: {
+    addToCart(state, book) {
+      const existingItem = state.cart.find((item) => item.id === book.id);
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        state.cart.push({ ...book, quantity: 1 });
+      }
+    },
+    removeFromCart(state, index) {
+      state.cart.splice(index, 1);
+    },
+    updateCartItemQuantity(state, { index, quantity }) {
+      state.cart[index].quantity = quantity;
+    },
+    setLoggedIn(state, value) {
+      state.isLoggedIn = value;
+    },
+  },
+  actions: {
+    login({ commit }, { username, password }) {
+      return new Promise((resolve, reject) => {
+        authService
+          .login(username, password)
+          .then(() => {
+            localStorage.setItem(TOKEN_KEY, "dummy_token");
+            commit("setLoggedIn", true);
+            resolve();
+          })
+          .catch(() => {
+            reject("Incorrect username or password");
+          });
+      });
+    },
+    logout({ commit }) {
+      return new Promise((resolve) => {
+        authService.logout().then(() => {
+          localStorage.removeItem(TOKEN_KEY);
+          commit("setLoggedIn", false);
+          resolve();
+        });
+      });
+    },
+    checkAuth({ commit }) {
+      if (localStorage.getItem(TOKEN_KEY)) {
+        commit("setLoggedIn", true);
+      }else{
+        commit("setLoggedIn", false);
+      }
+    },
+  },
+});
 
-<style scoped>
-.receipt-container {
-  width: 60%;
-  background-color: black;
-  border: 1px solid #dee2e6;
-  border-radius: 10px;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
-  color: white;
-}
-
-.receipt-item {
-  padding: 10px 0;
-  border-bottom: 1px solid #dee2e6;
-}
-
-.btn-primary {
-  background-color: gold !important;
-  color: black !important;
-  border-color: #007bff;
-    
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
-}
-
-.total-amount {
-  width: 10px !important;
-  display: block; 
-}
-
-
-</style>
