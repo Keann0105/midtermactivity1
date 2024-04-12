@@ -56,23 +56,48 @@ export default {
 </script>
 
 <style>
+.card, .form-control, .card-header, .btn-dark {
+  background-color: black !important; 
+  color: white !important;
+}
+
 .card {
   margin-top: 50px;
+  background: black !important;
+  color: white !important;
+  width: 500px; 
+  padding: 25px;
+}
+
+
+.btn-dark {
+  background-color: gold !important; 
+  color: black !important; 
+  width: 70%;
+  border: none; 
 }
 
 .card-header {
   font-size: 24px;
+  background-color: black; 
+  color: gold;
 }
 
-.btn-dark {
-  width: 100%;
-}
-.btn-dark:hover {
-  background-color: aliceblue;
-  border-color: #0062cc;
+.form-control {
+  background-color: black !important; 
+  color: white !important; 
+  border-color: gray; 
 }
 
 .text-danger {
   font-size: 14px;
+}
+
+.card-body {
+  background: black; 
+}
+
+.bg-dark {
+    background-color: black !important;
 }
 </style>
