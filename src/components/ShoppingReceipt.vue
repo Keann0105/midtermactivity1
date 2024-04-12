@@ -10,7 +10,7 @@
           <p class="mb-0 text-muted">Price: ₱{{ item.totalPrice }}</p>
         </div>
         <hr>
-        <h4 class="font-weight-bold text-end mb-3">Total Amount Due: ₱{{ totalAmountDue }}</h4>
+        <h4 class="font-weight-bold text-end mb-1 total-amount">Total Amount Due: ₱{{ totalAmountDue }}</h4>
         <button @click="confirmOrder" class="btn btn-success btn-block" data-bs-toggle="modal">Confirm Order</button>
         <button @click="goToBookList" class="btn btn-primary btn-block">Go to Book List</button>
       </div>
@@ -48,10 +48,11 @@ export default {
 <style scoped>
 .receipt-container {
   width: 60%;
-  background-color: #ffffff;
+  background-color: black;
   border: 1px solid #dee2e6;
   border-radius: 10px;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+  color: white;
 }
 
 .receipt-item {
@@ -60,12 +61,21 @@ export default {
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background-color: gold !important;
+  color: black !important;
   border-color: #007bff;
+    
 }
 
 .btn-primary:hover {
   background-color: #0056b3;
   border-color: #0056b3;
 }
+
+.total-amount {
+  width: 10px !important;
+  display: block; 
+}
+
+
 </style>
