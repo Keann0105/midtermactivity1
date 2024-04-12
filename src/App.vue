@@ -69,3 +69,32 @@ export default {
   }
 }
 </script>
+
+<style>
+
+body{
+  background: #EFECEC !important;
+}
+
+
+.navbar.bg-dark {
+  background-color: black !important;
+
+}
+
+
+.navbar.bg-dark .navbar-nav .nav-link {
+  color: gold !important; 
+}
+
+
+.navbar.bg-dark .navbar-brand {
+  color: gold !important;
+}
+
+
+.navbar.bg-dark .navbar-nav .nav-link:hover,
+.navbar.bg-dark .navbar-nav .nav-link:focus {
+  color: #ffd700; 
+}
+</style>
