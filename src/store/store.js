@@ -7,70 +7,76 @@ export const store = new Vuex.Store({
   name: "store",
   state: {
     books: [
-      { 
-        id: 1, title: "Berserk", 
+      {
+        id: 1,
+        title: "Berserk",
         author: "Kentaro Miura",
-        price: 10.01, 
-        imageUrl: 'img/book1.jpg' },
+        price: 10.01,
+        imageUrl: "img/book1.jpg",
+      },
 
-      { 
-        id: 2, title: "One Piece",
+      {
+        id: 2,
+        title: "One Piece",
         author: "Eiichiro Oda",
         price: 12.01,
-        imageUrl: 'img/book2.jpg'
-       },
-      { 
-        id: 3, title: "Naruto",
+        imageUrl: "img/book2.jpg",
+      },
+      {
+        id: 3,
+        title: "Naruto",
         author: "Masashi Kishimoto",
         price: 11.01,
-        imageUrl: 'img/book3.jpg'
+        imageUrl: "img/book3.jpg",
       },
-      { 
-        id: 4, 
-        title: "Dragon Ball", 
-        author: "Akira Toriyama", 
+      {
+        id: 4,
+        title: "Dragon Ball",
+        author: "Akira Toriyama",
         price: 9.01,
-        imageUrl: 'img/book4.jpg'
+        imageUrl: "img/book4.jpg",
       },
       {
         id: 5,
         title: "Attack on Titan",
         author: "Hajime Isayama",
         price: 13.01,
-        imageUrl: 'img/book5.jpg'
+        imageUrl: "img/book5.jpg",
       },
       {
         id: 6,
         title: "My Hero Academia",
         author: "Kohei Horikoshi",
         price: 10.99,
-        imageUrl: 'img/book6.jpg'
+        imageUrl: "img/book6.jpg",
       },
-      { 
-        id: 7, title: "Death Note",
-        author: "Tsugumi Ohba", 
+      {
+        id: 7,
+        title: "Death Note",
+        author: "Tsugumi Ohba",
         price: 11.5,
-        imageUrl: 'img/book7.jpg'
-       },
+        imageUrl: "img/book7.jpg",
+      },
       {
         id: 8,
         title: "Fullmetal Alchemist",
         author: "Hiromu Arakawa",
         price: 12.75,
-        imageUrl: 'img/book8.jpg'
+        imageUrl: "img/book8.jpg",
       },
-      { id: 9, 
-        title: "Tokyo Ghoul", 
-        author: "Sui Ishida", 
+      {
+        id: 9,
+        title: "Tokyo Ghoul",
+        author: "Sui Ishida",
         price: 9.75,
-        imageUrl: 'img/book9.jpg'
+        imageUrl: "img/book9.jpg",
       },
       {
         id: 10,
         title: "Demon Slayer",
         author: "Koyoharu Gotouge",
         price: 13.99,
-        imageUrl: 'img/book10.jpg'
+        imageUrl: "img/book10.jpg",
       },
     ],
     cart: [],
@@ -133,7 +139,6 @@ export const store = new Vuex.Store({
     logout({ commit }) {
       return new Promise((resolve) => {
         authService.logout().then(() => {
-          localStorage.removeItem(TOKEN_KEY);
           commit("setLoggedIn", false);
           resolve();
         });
@@ -142,10 +147,9 @@ export const store = new Vuex.Store({
     checkAuth({ commit }) {
       if (localStorage.getItem(TOKEN_KEY)) {
         commit("setLoggedIn", true);
-      }else{
+      } else {
         commit("setLoggedIn", false);
       }
     },
   },
 });
-

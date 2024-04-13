@@ -48,9 +48,10 @@ export default {
   },
   methods: {
     logout() {
-      localStorage.removeItem('user_token');
-      this.isLoggedIn = false;
-      window.location.reload();
+
+      this.$store.dispatch('logout').then(() => {
+       window.location.reload();
+      })
     },
     checkout() {
       if (this.cartItems.length > 0) {
@@ -60,19 +61,18 @@ export default {
       }
     },
     checkAuthentication() {
-     
+
       this.$store.dispatch('checkAuth');
 
       alert(`Current user authentication: ${this.isLoggedIn}`);
     }
-  
+
   }
 }
 </script>
 
 <style>
-
-body{
+body {
   background: #EFECEC !important;
 }
 
@@ -84,7 +84,7 @@ body{
 
 
 .navbar.bg-dark .navbar-nav .nav-link {
-  color: gold !important; 
+  color: gold !important;
 }
 
 
@@ -95,6 +95,6 @@ body{
 
 .navbar.bg-dark .navbar-nav .nav-link:hover,
 .navbar.bg-dark .navbar-nav .nav-link:focus {
-  color: #ffd700; 
+  color: #ffd700;
 }
 </style>

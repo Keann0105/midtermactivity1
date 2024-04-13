@@ -48,7 +48,7 @@ export default {
 <style scoped>
 .receipt-container {
   width: 60%;
-  background-color: black;
+  background-color: #22333b;
   border: 1px solid #dee2e6;
   border-radius: 10px;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
@@ -73,7 +73,7 @@ export default {
 }
 
 .total-amount {
-  width: 10px !important;
+
   display: block; 
 }
 

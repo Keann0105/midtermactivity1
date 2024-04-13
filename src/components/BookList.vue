@@ -5,7 +5,7 @@
       <!-- Manga List Container -->
       <div class="col-lg-8">
         <div class="d-flex justify-content-between align-items-center mb-3">
-          <h2 style="font-size: 2rem; margin-left: 20px; color: black;">Manga List</h2>
+          <h2 style="font-size: 2rem; margin-left: 20px; ;">Manga List</h2>
           <form class="form-inline my-2 my-lg-0">
             <input v-model="searchQuery" class="form-control mr-sm-2" type="search" placeholder="Search"
               aria-label="Search">
@@ -15,7 +15,7 @@
         <div class="book-container d-flex flex-wrap">
           <div v-for="book in filteredBooks" :key="book.id" class="book-card">
             <div class="card-body">
-              <img :src="'/' + book.imageUrl" class="img-fluid mb-2" alt="Book Cover"/>
+              <img :src="'/' + book.imageUrl" class="img-fluid mb-2" alt="Book Cover" />
               <h5 class="card-title">{{ book.title }}</h5>
               <p class="card-text">Author: {{ book.author }}</p>
               <p class="card-text">Price: ₱{{ book.price }}</p>
@@ -26,9 +26,9 @@
       </div>
 
       <!-- My Cart Container -->
-      <div class="col-lg-4">
-        <h2 class="mb-4">My Cart</h2>
-        <div class="cart-container">
+      <div class="col-lg-3 ml-4     ">
+        <h2 class="mb-4 mt-4">My Cart</h2>
+        <div class="cart-container row ">
           <div class="card mb-3" v-for="(item, index) in cartItems" :key="index">
             <div class="card-body">
               <h5 class="card-title">{{ item.title }}</h5>
@@ -53,8 +53,17 @@
           <input type="text" class="form-control" placeholder="Total"
             aria-describedby="btnGroupAddon btnGroupAddonCurrency" :value="totalAmountDue">
         </div>
-        <button @click="checkout" class="btn btn-dark mt-3">Checkout</button>
+        <div class="text-center"> <button @click="checkout" class="btn btn-dark mt-2">Checkout</button></div>
       </div>
+    </div>
+  </div>
+  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      {{ errorMessage }}
     </div>
   </div>
 </template>
@@ -105,24 +114,27 @@ export default {
 <style>
 .container-fluid {
   max-width: 100%;
-  margin: auto;
- 
+  padding: 3px;
+
 }
 
 .book-container {
   padding: 10px;
-  height: 100px;
- 
+  height: 700px;
+
+  overflow-y: auto;
 }
 
 .book-card {
-  width: calc(20% - 20px); 
+  width: calc(20% - 20px);
   margin: 10px;
   border: 1px solid #ccc;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: black;
   transition: transform 0.3s ease;
   background: black;
   color: white;
+  align-items: center;
+  justify-content: center;
 }
 
 .book-card:hover {
@@ -130,18 +142,21 @@ export default {
 }
 
 .cart-container {
-  border: 1px solid black;
+  margin-top: 20px;
+  border: 1px solid rgb(89, 15, 15);
   padding: 10px;
   height: 500px;
   background: white;
-  
-}
+  overflow-y: auto;
 
-.button.btn.btn-primary{
-  background: gold;
-  color: black;
-  
 }
 
 
+
+
+.button.btn.btn-primary {
+  background: #9BBC;
+  color: #669BBC;
+
+}
 </style>

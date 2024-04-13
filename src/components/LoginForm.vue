@@ -7,7 +7,7 @@
           <div class="card-header bg-dark text-center">
             <h4>Login Form</h4>
           </div>
-          <div class="card-body">
+          <div class="card-body rounded">
             <form @submit.prevent="attemptLogin">
               <div class="form-group">
                 <label for="username" class=" text-white">Username</label>
@@ -71,8 +71,8 @@ export default {
 
 
 .btn-dark {
-  background-color: gold !important; 
-  color: black !important; 
+  background-color: #252422 !important; 
+  color: white;
   width: 70%;
   border: none; 
 }
@@ -84,7 +84,7 @@ export default {
 }
 
 .form-control {
-  background-color: black !important; 
+  background-color: #000814 !important; 
   color: white !important; 
   border-color: gray; 
 }
@@ -94,7 +94,8 @@ export default {
 }
 
 .card-body {
-  background: black; 
+  background: #000814; 
+  
 }
 
 .bg-dark {

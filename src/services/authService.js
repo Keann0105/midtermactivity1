@@ -19,9 +19,15 @@ export default {
   },
 
   logout() {
-    //this function to logout the user
     localStorage.removeItem(TOKEN_KEY);
-    return Promise.resolve();
+
+    if (localStorage.getItem(TOKEN_KEY) === null) {
+      return Promise.resolve();
+    }else{
+
+      return Promise.reject();
+    }
+
   },
 
   isAuthenticated() {
