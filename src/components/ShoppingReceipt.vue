@@ -6,11 +6,11 @@
       <div v-if="cartItems.length > 0">
         <div v-for="(item, index) in cartItems" :key="index" class="receipt-item">
           <p class="mb-1">{{ item.title }}</p>
-          <p class="mb-1 text-muted">Quantity: {{ item.quantity }}</p>
-          <p class="mb-0 text-muted">Price: ₱{{ item.totalPrice }}</p>
+          <p class="mb-1 text-white">Quantity: {{ item.quantity }}</p>
+          <p class="mb-0 text-white">Price: ₱{{ item.totalPrice }}</p>
         </div>
         <hr>
-        <h4 class="font-weight-bold text-end mb-1 total-amount">Total Amount Due: ₱{{ totalAmountDue }}</h4>
+        <h4 class="font-weight-bold text-end mb-1 total-amount mb-4">Total Amount Due: ₱{{ totalAmountDue }}</h4>
         <button @click="confirmOrder" class="btn btn-success btn-block" data-bs-toggle="modal">Confirm Order</button>
         <button @click="goToBookList" class="btn btn-primary btn-block">Go to Book List</button>
       </div>
@@ -61,8 +61,8 @@ export default {
 }
 
 .btn-primary {
-  background-color: gold !important;
-  color: black !important;
+
+  color: white !important;
   border-color: #007bff;
     
 }

@@ -5,10 +5,10 @@
       <!-- Manga List Container -->
       <div class="col-lg-8">
         <div class="d-flex justify-content-between align-items-center mb-3">
-          <h2 style="font-size: 2rem; margin-left: 20px; ;">Manga List</h2>
+          <h2 style="font-size: 2rem; margin-left: 20px;">Manga List</h2>
           <form class="form-inline my-2 my-lg-0">
-            <input v-model="searchQuery" class="form-control mr-sm-2" type="search" placeholder="Search"
-              aria-label="Search">
+            <input v-model="searchQuery" class="form-control bg-white text-black mr-sm-2" type="search"
+              placeholder="Search" aria-label="Search">
           </form>
         </div>
 
@@ -29,7 +29,7 @@
       <div class="col-lg-3 ml-4     ">
         <h2 class="mb-4 mt-4">My Cart</h2>
         <div class="cart-container row ">
-          <div class="card mb-3" v-for="(item, index) in cartItems" :key="index">
+          <div class="card mb-3 mr-2" v-for="(item, index) in cartItems" :key="index">
             <div class="card-body">
               <h5 class="card-title">{{ item.title }}</h5>
               <p class="card-text">Price: ₱{{ item.totalPrice }}</p>
@@ -53,7 +53,7 @@
           <input type="text" class="form-control" placeholder="Total"
             aria-describedby="btnGroupAddon btnGroupAddonCurrency" :value="totalAmountDue">
         </div>
-        <div class="text-center"> <button @click="checkout" class="btn btn-dark mt-2">Checkout</button></div>
+        <div class="text-end"> <button @click="checkout" class="btn btn-dark mt-2">Checkout</button></div>
       </div>
     </div>
   </div>

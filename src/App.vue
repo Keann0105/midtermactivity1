@@ -3,7 +3,7 @@
     <div class="row">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark mx-auto ">
-        <a class="navbar-brand mx-5 " href="#">Book Store</a>
+        <a class="navbar-brand mx-5 p-3" href="#">Book Store</a>
 
         <button @click="checkAuthentication" class="btn btn-outline-warning mr-2 ml-auto">
           Check Authentication
